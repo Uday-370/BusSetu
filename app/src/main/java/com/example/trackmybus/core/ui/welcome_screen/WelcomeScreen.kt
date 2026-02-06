@@ -63,7 +63,7 @@ fun WelcomeScreen(
                 Spacer(modifier = Modifier.height(32.dp))
 
                 Text(
-                    text = "ridhiyam !",
+                    text = "Welcome !",
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
                     color = TextPrimary,

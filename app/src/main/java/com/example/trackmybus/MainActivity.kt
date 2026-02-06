@@ -8,6 +8,7 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import com.example.trackmybus.core.ui.loginscreen.LoginScreen
+import com.example.trackmybus.core.ui.welcome_screen.WelcomeScreen
 import com.example.trackmybus.ui.theme.TrackMyBusTheme // Replace with your theme import
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
@@ -46,9 +47,11 @@ class MainActivity : ComponentActivity() {
                 // --- Your main app content goes here ---
                 // Example: NaveHost or your WelcomeScreen()
                 // WelcomeScreen(...)
-                LoginScreen(
-                    onLoginClick = {}
+                WelcomeScreen(
+                    onDriverClick = {},
+                    onUserClick = {}
                 )
+
             }
         }
     }
@@ -57,3 +60,4 @@ class MainActivity : ComponentActivity() {
 // git add .
 // git commit -m "Message"
 // git push
+//git pull
