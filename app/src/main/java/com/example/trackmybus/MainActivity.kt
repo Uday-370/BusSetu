@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
+import com.example.trackmybus.core.ui.driverdashboard.DriverDashboardScreen
 import com.example.trackmybus.core.ui.loginscreen.LoginScreen
 import com.example.trackmybus.core.ui.welcome_screen.WelcomeScreen
 import com.example.trackmybus.ui.theme.TrackMyBusTheme // Replace with your theme import
@@ -47,10 +48,7 @@ class MainActivity : ComponentActivity() {
                 // --- Your main app content goes here ---
                 // Example: NaveHost or your WelcomeScreen()
                 // WelcomeScreen(...)
-                WelcomeScreen(
-                    onDriverClick = {},
-                    onUserClick = {}
-                )
+                DriverDashboardScreen(onBackClick = {})
 
             }
         }
