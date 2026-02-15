@@ -1,4 +1,4 @@
-package com.example.trackmybus.core.ui.driverdashboard
+package com.example.bussetu.core.ui.driverdashboard
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
@@ -52,10 +52,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+
+import com.example.bussetu.ui.theme.BrandBlue
+import com.example.bussetu.ui.theme.TextPrimary
+import com.example.bussetu.ui.theme.TextSecondary
 import com.example.trackmybus.R
-import com.example.trackmybus.ui.theme.BrandBlue
-import com.example.trackmybus.ui.theme.TextPrimary
-import com.example.trackmybus.ui.theme.TextSecondary
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

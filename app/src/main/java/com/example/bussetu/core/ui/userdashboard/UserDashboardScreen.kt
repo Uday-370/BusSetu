@@ -1,4 +1,4 @@
-package com.example.trackmybus.core.ui.userdashboard
+package com.example.bussetu.core.ui.userdashboard
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -51,11 +51,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.zIndex
-import com.example.trackmybus.core.ui.components.TMBTextField
-import com.example.trackmybus.core.ui.components.TMBTopBar
-import com.example.trackmybus.ui.theme.BrandBlue
-import com.example.trackmybus.ui.theme.TextPrimary
-import com.example.trackmybus.ui.theme.TextSecondary
+import com.example.bussetu.core.ui.components.TMBTextField
+import com.example.bussetu.core.ui.components.TMBTopBar
+import com.example.bussetu.ui.theme.BrandBlue
+import com.example.bussetu.ui.theme.TextPrimary
+import com.example.bussetu.ui.theme.TextSecondary
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -135,7 +135,7 @@ fun UserDashboardScreen(
                 titleContent = {
                     Text(
                         text = "BusSetu",
-                        fontSize = 20.sp,
+                        fontSize = 25.sp,
                         fontWeight = FontWeight.Bold,
                         color = BrandBlue
                     )

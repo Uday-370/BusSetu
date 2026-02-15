@@ -1,4 +1,4 @@
-package com.example.trackmybus
+package com.example.bussetu
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -7,8 +7,8 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
-import com.example.trackmybus.core.ui.userdashboard.UserDashboardScreen
-import com.example.trackmybus.ui.theme.TrackMyBusTheme
+import com.example.bussetu.core.ui.userdashboard.UserDashboardScreen
+import com.example.bussetu.ui.theme.TrackMyBusTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 class MainActivity : ComponentActivity() {

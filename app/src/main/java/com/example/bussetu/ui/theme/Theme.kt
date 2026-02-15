@@ -1,4 +1,4 @@
-package com.example.trackmybus.ui.theme
+package com.example.bussetu.ui.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme

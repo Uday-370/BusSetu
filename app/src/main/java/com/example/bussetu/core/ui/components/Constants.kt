@@ -1,4 +1,4 @@
-package com.example.trackmybus.core.ui.components
+package com.example.bussetu.core.ui.components
 
 object AppConstants {
     const val APP_NAME = "TrackMyBus"

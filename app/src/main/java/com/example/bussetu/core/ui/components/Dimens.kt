@@ -1,4 +1,4 @@
-package com.example.trackmybus.core.ui.components
+package com.example.bussetu.core.ui.components
 
 import androidx.compose.ui.unit.dp
 

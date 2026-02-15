@@ -14,5 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TrackMyBus"
+rootProject.name = "BusSetu"
 include(":app")
