@@ -1,4 +1,4 @@
-package com.example.bussetu.core.ui.components
+package com.example.bussetu.core.presentation.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.height
@@ -20,7 +20,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-import com.example.bussetu.ui.theme.TextPrimary
+import com.example.bussetu.core.ui.theme.TextPrimary
 import com.example.trackmybus.R
 
 @OptIn(ExperimentalMaterial3Api::class)

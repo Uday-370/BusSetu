@@ -2,61 +2,107 @@ package com.example.bussetu
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
-import com.example.bussetu.core.ui.userdashboard.UserDashboardScreen
-import com.example.bussetu.ui.theme.TrackMyBusTheme
+// --- IMPORTS ---
+import com.example.bussetu.feature_driver.presentation.DriverDashboardScreen
+import com.example.bussetu.feature_auth.presentation.LoginScreen
+import com.example.bussetu.feature_map.presentation.mapscreen.MapScreen
+import com.example.bussetu.feature_map.presentation.userdashboard.UserDashboardScreen
+import com.example.bussetu.core.ui.welcomescreen.WelcomeScreen
+import com.example.bussetu.core.ui.theme.BusSetuTheme
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
-        // 1. Enable Edge-to-Edge BEFORE super.onCreate
-        // This allows the app to draw behind the system bars
+        // 1. Enable Edge-to-Edge
         enableEdgeToEdge()
-
         super.onCreate(savedInstanceState)
 
         setContent {
-            // Replace 'TrackMyBusTheme' with whatever your main theme wrapper is named
-            TrackMyBusTheme {
-                // Check if the system is currently in dark mode
+            BusSetuTheme {
+                // --- System Bar Logic ---
                 val isDarkTheme = isSystemInDarkTheme()
-
-                // Get the system UI controller (you might need to add the dependency below)
                 val systemUiController = rememberSystemUiController()
 
-                // 2. Use a SideEffect to update system bar colors whenever the theme changes
                 SideEffect {
-                    // If the app background is light (like your white TopBar),
-                    // we need dark icons so they are visible.
-
-                    // 'true' creates dark icons (for light backgrounds)
-                    // 'false' creates light icons (for dark backgrounds)
                     val useDarkIcons = !isDarkTheme
-
                     systemUiController.setSystemBarsColor(
-                        color = Color.Transparent, // Make the bar itself transparent
-                        darkIcons = useDarkIcons // Set icon color contrast
+                        color = Color.Transparent,
+                        darkIcons = useDarkIcons
                     )
                 }
 
-                // --- Your main app content goes here ---
-                // Example: NaveHost or your WelcomeScreen()
-                // WelcomeScreen(...)
-                UserDashboardScreen(
-                    onMenuClick = { /* Handle Menu Click */ },
-                    onNavigateToMap = { /* Handle Map Navigation */ }
-                )
+                // --- 2. NAVIGATION LOGIC ---
+                // States: "welcome", "login", "driver_dashboard", "dashboard", "map"
+                var currentScreen by remember { mutableStateOf("welcome") }
 
+                when (currentScreen) {
+                    "welcome" -> {
+                        WelcomeScreen(
+                            onDriverClick = {
+                                currentScreen = "login"
+                            },
+                            onUserClick = {
+                                currentScreen = "dashboard"
+                            }
+                        )
+                    }
+
+                    "login" -> {
+                        // Handle Android Back Button: Go back to Welcome
+                        BackHandler { currentScreen = "welcome" }
+
+                        LoginScreen(
+                            onLoginClick = {
+                                // Navigate to Driver Dashboard upon successful login
+                                currentScreen = "driver_dashboard"
+                            }
+                        )
+                    }
+
+                    "driver_dashboard" -> {
+                        // Handle Android Back Button: Go back to Welcome (Logout)
+                        BackHandler { currentScreen = "welcome" }
+
+                        DriverDashboardScreen(
+                            onBackClick = {
+                                // The back arrow in your UI goes back to Welcome
+                                currentScreen = "welcome"
+                            }
+                        )
+                    }
+
+                    "dashboard" -> {
+                        // Handle Android Back Button: Go back to Welcome
+                        BackHandler { currentScreen = "welcome" }
+
+                        UserDashboardScreen(
+                            onMenuClick = { /* Open Drawer or Menu */ },
+                            onNavigateToMap = {
+                                currentScreen = "map"
+                            }
+                        )
+                    }
+
+                    "map" -> {
+                        // Handle Android Back Button: Go back to Dashboard
+                        BackHandler { currentScreen = "dashboard" }
+
+                        MapScreen(
+                            onBackClick = { currentScreen = "dashboard" }
+                        )
+                    }
+                }
             }
         }
     }
 }
-
-// git add .
-// git commit -m "Message"
-// git push
-//git pull

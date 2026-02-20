@@ -1,4 +1,4 @@
-package com.example.bussetu.core.ui.components
+package com.example.bussetu.core.presentation.components
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope

@@ -2,6 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    // ✅ ADDED FOR HILT
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -46,7 +49,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
 
-    // ✅ ACTIVITY — LAST COMPATIBLE
+    // ACTIVITY — LAST COMPATIBLE
     implementation("androidx.activity:activity-compose:1.10.1")
 
     // Compose
@@ -74,7 +77,20 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.test.manifest)
 
+    // Lottie Animations
+    implementation("com.airbnb.android:lottie-compose:6.3.0")
+
     implementation("com.google.accompanist:accompanist-systemuicontroller:0.32.0")
 
     implementation("androidx.compose.material:material-icons-extended:1.6.0")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+    implementation("org.osmdroid:osmdroid-android:6.1.16")
+
+    implementation("androidx.media3:media3-exoplayer:1.2.0")
+    implementation("androidx.media3:media3-ui:1.2.0")
+
+    // ✅ ADDED FOR HILT & CLEAN ARCHITECTURE
+    implementation("com.google.dagger:hilt-android:2.51.1")
+    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 }

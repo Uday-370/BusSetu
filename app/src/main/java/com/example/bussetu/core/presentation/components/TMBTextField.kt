@@ -1,9 +1,10 @@
-package com.example.bussetu.core.ui.components
+package com.example.bussetu.core.presentation.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -13,6 +14,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.text.TextStyle
+
 // Assuming these are defined in your theme
 // import com.example.trackmybus.ui.theme.TextSecondary
 // import com.example.trackmybus.ui.theme.BrandBlue
@@ -25,6 +28,7 @@ fun TMBTextField(
     icon: ImageVector,
     modifier: Modifier = Modifier,
     visualTransformation: VisualTransformation = VisualTransformation.None,
+    textStyle: TextStyle = LocalTextStyle.current,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default
 ) {
     OutlinedTextField(
@@ -48,6 +52,7 @@ fun TMBTextField(
         ),
         visualTransformation = visualTransformation,
         keyboardOptions = keyboardOptions,
+        textStyle = textStyle,
         singleLine = true
     )
 }

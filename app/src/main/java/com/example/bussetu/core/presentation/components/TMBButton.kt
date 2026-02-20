@@ -1,4 +1,4 @@
-package com.example.bussetu.core.ui.components
+package com.example.bussetu.core.presentation.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -10,7 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.example.bussetu.ui.theme.BrandBlue
+import com.example.bussetu.core.ui.theme.BrandBlue
 
 @Composable
 fun TMBButton(

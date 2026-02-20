@@ -1,4 +1,4 @@
-package com.example.bussetu.ui.theme
+package com.example.bussetu.core.ui.theme
 
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.lightColorScheme
@@ -17,7 +17,7 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun TrackMyBusTheme(
+fun BusSetuTheme(
     content: @Composable () -> Unit
 ) {
     MaterialTheme(

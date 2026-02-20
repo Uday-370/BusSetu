@@ -1,5 +1,6 @@
-package com.example.bussetu.core.ui.components
+package com.example.bussetu.core.presentation.components
 
+import android.R
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -89,7 +90,7 @@ private fun TMBRoleButtonPreview() {
     // Replace 'android.R.drawable.ic_menu_camera' with one of your actual drawable IDs to see the real image.
     TMBRoleButton(
         text = "Preview Role",
-        imageRes = android.R.drawable.ic_menu_camera,
+        imageRes = R.drawable.ic_menu_camera,
         gradientColors = listOf(Color(0xFF6CB6FF), Color(0xFF4A90E2)),
         onClick = {}
     )
