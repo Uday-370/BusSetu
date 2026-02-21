@@ -29,7 +29,9 @@ fun TMBTextField(
     modifier: Modifier = Modifier,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     textStyle: TextStyle = LocalTextStyle.current,
-    keyboardOptions: KeyboardOptions = KeyboardOptions.Default
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    // ✅ ADDED: Optional trailing icon parameter for the password visibility toggle
+    trailingIcon: @Composable (() -> Unit)? = null
 ) {
     OutlinedTextField(
         value = value,
@@ -41,6 +43,8 @@ fun TMBTextField(
                 contentDescription = null
             )
         },
+        // ✅ ADDED: Pass the trailing icon to the underlying Material 3 component
+        trailingIcon = trailingIcon,
         modifier = modifier.fillMaxWidth(),
         shape = RoundedCornerShape(12.dp),
         colors = OutlinedTextFieldDefaults.colors(
@@ -56,4 +60,3 @@ fun TMBTextField(
         singleLine = true
     )
 }
-

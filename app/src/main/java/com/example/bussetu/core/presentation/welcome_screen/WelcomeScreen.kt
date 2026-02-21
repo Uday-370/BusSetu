@@ -1,4 +1,4 @@
-package com.example.bussetu.core.ui.welcomescreen
+package com.example.bussetu.core.welcome_screen
 
 import android.app.Activity
 import android.net.Uri
