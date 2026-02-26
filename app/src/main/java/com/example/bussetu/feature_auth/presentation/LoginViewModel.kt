@@ -20,9 +20,9 @@ class LoginViewModel @Inject constructor(
     // Public immutable state that the UI observes
     val loginState: StateFlow<LoginState> = _loginState.asStateFlow()
 
-    fun login(email: String, password: String) {
+    fun login(userName: String, password: String) {
         // Basic validation before hitting the network
-        if (email.isBlank() || password.isBlank()) {
+        if (userName.isBlank() || password.isBlank()) {
             _loginState.value = LoginState.Error("Please enter both username and password")
             return
         }
@@ -32,7 +32,7 @@ class LoginViewModel @Inject constructor(
 
         // Launch a coroutine to do the background network work
         viewModelScope.launch {
-            val result = repository.login(email, password)
+            val result = repository.login(userName, password)
 
             // The built-in Kotlin Result class makes this extremely clean
             result.onSuccess {

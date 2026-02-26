@@ -1,5 +1,6 @@
 package com.example.bussetu.core.navigation
 
+import android.app.Activity
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -22,6 +23,7 @@ import com.example.bussetu.feature_map.presentation.userdashboard.UserDashboardS
 
 // Map Screen is in feature_map.presentation -> mapscreen
 import com.example.bussetu.feature_map.presentation.mapscreen.MapScreen
+import androidx.compose.ui.platform.LocalContext
 
 @Composable
 fun BusSetuNavGraph(
@@ -56,10 +58,20 @@ fun BusSetuNavGraph(
         }
 
         // 3. Driver Dashboard
-        composable(route = Screen.DriverDashboard.route) {
+        composable(Screen.DriverDashboard.route) {
+            val context = LocalContext.current // Get the activity context
+
             DriverDashboardScreen(
                 onBackClick = {
-                    navController.popBackStack()
+                    // ✅ THE FIX: Standard Android Behavior.
+                    // This minimizes the app to the background instead of going to the Welcome screen!
+                    (context as? Activity)?.moveTaskToBack(true)
+                },
+                onLogoutClick = {
+                    // ONLY the explicit logout button goes back to the Welcome screen
+                    navController.navigate(Screen.Welcome.route) {
+                        popUpTo(0) { inclusive = true }
+                    }
                 }
             )
         }
