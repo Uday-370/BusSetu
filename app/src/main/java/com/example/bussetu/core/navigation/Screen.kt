@@ -6,5 +6,12 @@ sealed class Screen(val route: String) {
     object Login : Screen("login_screen")
     object DriverDashboard : Screen("driver_dashboard_screen")
     object UserDashboard : Screen("user_dashboard_screen")
-    object Map : Screen("map_screen")
+
+    object Map : Screen("map/{tripId}") {
+        fun createRoute(tripId: Int): String {
+            return "map/$tripId"
+        }
+    }
+
+    object Chatbot : Screen("chatbot_screen")
 }

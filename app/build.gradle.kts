@@ -102,4 +102,7 @@ dependencies {
 
     // Preferences DataStore (For saving Driver ID and keeping them logged in)
     implementation("androidx.datastore:datastore-preferences:1.0.0")
+
+    // Socket.IO
+    implementation("io.socket:socket.io-client:2.1.0")
 }

@@ -1,15 +1,17 @@
 package com.example.bussetu.feature_driver.domain.model
 
+import com.google.gson.annotations.SerializedName
+
 // Represents your 'buses' table
 data class Bus(
     val id: Int,
-    val busNumber: String
+    @SerializedName("bus_number") val busNumber: String
 )
 
 // Represents your 'routes' table
 data class Route(
     val id: Int,
-    val routeName: String
+    @SerializedName("route_name") val routeName: String
 )
 
 // The result after clicking "Start Duty" (matches your 'trips' table)

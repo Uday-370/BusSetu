@@ -30,6 +30,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import android.content.pm.ServiceInfo
 
 // ✅ REQUIRED FOR HILT TO WORK IN A SERVICE
 @AndroidEntryPoint
@@ -107,7 +108,12 @@ class LocationService : Service() {
             .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
             .build()
 
-        startForeground(1, notification)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            startForeground(1, notification, ServiceInfo.FOREGROUND_SERVICE_TYPE_LOCATION)
+        } else {
+            startForeground(1, notification)
+        }
+
         startLocationUpdates()
 
         return START_STICKY
@@ -118,8 +124,12 @@ class LocationService : Service() {
             return
         }
 
+        // ✅ BATTERY OPTIMIZATION:
+        // Set minimum displacement to 10 meters. If the bus is stopped at a traffic light
+        // or a bus stop, the GPS will stop aggressively waking up the CPU!
         val locationRequest = LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 5000L)
             .setMinUpdateIntervalMillis(2000L)
+            .setMinUpdateDistanceMeters(10f) 
             .build()
 
         fusedLocationClient.requestLocationUpdates(

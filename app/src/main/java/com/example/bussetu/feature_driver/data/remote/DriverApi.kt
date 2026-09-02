@@ -5,6 +5,8 @@ import com.example.bussetu.feature_driver.domain.model.Route
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
 
 data class EndTripRequest(
     val trip_id: Int
@@ -17,8 +19,7 @@ data class EndTripResponse(
 // What we send to the server when "Start Duty" is clicked
 data class StartTripRequest(
     val bus_id: Int,
-    val route_id: Int,
-    val driver_id: Int
+    val route_id: Int
 )
 
 data class UpdateLocationRequest(
@@ -29,37 +30,45 @@ data class UpdateLocationRequest(
 
 // What the server returns (the new trip ID)
 data class StartTripResponse(
-    val trip_id: Int,
-    val message: String
+    val id: Int, // The backend trips table returns the ID as 'id', not 'trip_id'
+    val bus_id: Int,
+    val route_id: Int,
+    val driver_id: Int,
+    val status: String
 )
 
+// The backend returns the inserted location row, not {success, message}
 data class UpdateLocationResponse(
-    val success: Boolean,
-    val message: String
+    val id: Int,
+    val trip_id: Int,
+    val latitude: Double,
+    val longitude: Double,
+    val speed: Double,
+    val timestamp: String
 )
 
 interface DriverApi {
 
     // 1. Get list of available buses for the dropdown
-    @GET("api/driver/buses") // Adjust to your actual backend URL
+    @GET("api/buses") // Actual backend URL
     suspend fun getAvailableBuses(): List<Bus>
 
     // 2. Get list of routes for the dropdown
-    @GET("api/driver/routes")
+    @GET("api/routes")
     suspend fun getRoutes(): List<Route>
 
     // 3. Create a new trip in the 'trips' table
-    @POST("api/driver/trip/start")
+    @POST("api/trips/start")
     suspend fun startTrip(
         @Body request: StartTripRequest
     ): StartTripResponse
 
-    @POST("api/driver/trip/end")
+    @PUT("api/trips/{id}/end")
     suspend fun endTrip(
-        @Body request: EndTripRequest
+        @Path("id") tripId: Int
     ): EndTripResponse
 
-    @POST("api/driver/location/update")
+    @POST("api/locations/update")
     suspend fun updateLocation(
         @Body request: UpdateLocationRequest
     ): UpdateLocationResponse

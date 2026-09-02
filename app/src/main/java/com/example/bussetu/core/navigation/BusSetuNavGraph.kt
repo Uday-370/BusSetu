@@ -1,29 +1,22 @@
 package com.example.bussetu.core.navigation
 
+// --- EXACT IMPORTS BASED ON YOUR SCREENSHOTS ---
 import android.app.Activity
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
+import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-
-// --- EXACT IMPORTS BASED ON YOUR SCREENSHOTS ---
-
-// Welcome Screen is in core -> presentation -> welcome_screen
+import androidx.navigation.navArgument
 import com.example.bussetu.core.welcome_screen.WelcomeScreen
-
-// Login Screen is in feature_auth.presentation
 import com.example.bussetu.feature_auth.presentation.LoginScreen
-
-// Driver Dashboard is in feature_driver.presentation
+import com.example.bussetu.feature_dashboard.presentation.userdashboard.UserDashboardScreen
 import com.example.bussetu.feature_driver.presentation.DriverDashboardScreen
-
-// User Dashboard is in feature_map.presentation -> userdashboard
-import com.example.bussetu.feature_map.presentation.userdashboard.UserDashboardScreen
-
-// Map Screen is in feature_map.presentation -> mapscreen
+import com.example.bussetu.feature_chatbot.presentation.ChatbotScreen
 import com.example.bussetu.feature_map.presentation.mapscreen.MapScreen
-import androidx.compose.ui.platform.LocalContext
+import android.net.Uri
 
 @Composable
 fun BusSetuNavGraph(
@@ -59,16 +52,13 @@ fun BusSetuNavGraph(
 
         // 3. Driver Dashboard
         composable(Screen.DriverDashboard.route) {
-            val context = LocalContext.current // Get the activity context
+            val context = LocalContext.current
 
             DriverDashboardScreen(
                 onBackClick = {
-                    // ✅ THE FIX: Standard Android Behavior.
-                    // This minimizes the app to the background instead of going to the Welcome screen!
                     (context as? Activity)?.moveTaskToBack(true)
                 },
                 onLogoutClick = {
-                    // ONLY the explicit logout button goes back to the Welcome screen
                     navController.navigate(Screen.Welcome.route) {
                         popUpTo(0) { inclusive = true }
                     }
@@ -76,22 +66,37 @@ fun BusSetuNavGraph(
             )
         }
 
-        // 4. User Dashboard (Passenger)
+        // 4. User Dashboard
         composable(route = Screen.UserDashboard.route) {
             UserDashboardScreen(
-                onMenuClick = { /* Handle menu later */ },
-                onNavigateToMap = {
-                    navController.navigate(Screen.Map.route)
+                onMenuClick = { /* Drawer */ },
+                onNavigateToMap = { tripId ->
+                    navController.navigate(Screen.Map.createRoute(tripId))
+                },
+                onNavigateToChatbot = {
+                    navController.navigate(Screen.Chatbot.route)
                 }
             )
         }
 
+        // 6. Chatbot Screen
+        composable(route = Screen.Chatbot.route) {
+            ChatbotScreen(onBackClick = { navController.popBackStack() })
+        }
+
         // 5. Map Screen
-        composable(route = Screen.Map.route) {
+        composable(
+            route = Screen.Map.route,
+            arguments = listOf(
+                navArgument("tripId") { type = NavType.IntType } // ✅ Expects Int
+            )
+        ) { backStackEntry ->
+            // Extract the Int!
+            val tripId = backStackEntry.arguments?.getInt("tripId") ?: -1
+
             MapScreen(
-                onBackClick = {
-                    navController.popBackStack()
-                }
+                onBackClick = { navController.popBackStack() },
+                onChatbotClick = { navController.navigate(Screen.Chatbot.route) }
             )
         }
     }

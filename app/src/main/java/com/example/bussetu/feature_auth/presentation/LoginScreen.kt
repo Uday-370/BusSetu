@@ -16,6 +16,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
@@ -171,22 +172,22 @@ fun LoginScreen(
                             modifier = Modifier.padding(bottom = 24.dp)
                         )
 
-                        // --- USERNAME INPUT ---
+                        // --- EMAIL INPUT ---
                         TMBTextField(
                             value = userName,
                             onValueChange = {
                                 userName = it
                                 userNameError = false // Clear error when typing
                             },
-                            placeholder = "User Name",
-                            icon = Icons.Default.Person,
-                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+                            placeholder = "Email Address",
+                            icon = Icons.Default.Email,
+                            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                             modifier = Modifier.fillMaxWidth()
                         )
-                        // ✅ NEW: Inline Username Error
+                        // Inline Email Error
                         if (userNameError) {
                             Text(
-                                text = "Username cannot be empty",
+                                text = "Email address cannot be empty",
                                 color = MaterialTheme.colorScheme.error,
                                 fontSize = 12.sp,
                                 modifier = Modifier.padding(start = 16.dp, top = 4.dp)

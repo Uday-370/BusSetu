@@ -1,15 +1,20 @@
 *.iml
 .gradle
 /local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
+.idea/
+.vscode/
 .DS_Store
 /build
 /captures
 .externalNativeBuild
 .cxx
 local.properties
+
+# Backend secrets — NEVER commit these
+backend/.env
+.env
+
+# Node dependencies
+backend/node_modules
+frontend/node_modules
+
